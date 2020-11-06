@@ -1,0 +1,5 @@
+1. generate new component
+`ng generate component <component_name>`
+
+2. generate new service
+`ng generate service <service_name>`

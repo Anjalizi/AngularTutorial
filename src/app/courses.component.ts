@@ -13,7 +13,7 @@ import { CoursesService } from './courses.service';
 	// template: '<h2>{{ title }}</h2>' // value of title assigned at runtime
 	// template: '<h2>{{ "Title: " + title }}</h2>' // concatenate string and DOM element 'title'
 	template: `
-		<h2>{{ getTitle() }}</h2>
+		<h2>{{ len_courses + " " + getTitle() }}</h2>
 		<ul>
 			<li *ngFor="let course of courses">
 				{{ course }}
@@ -27,11 +27,15 @@ import { CoursesService } from './courses.service';
 export class CoursesComponent {
 	title = 'List of Courses';
 	courses;
+	len_courses;
 	advanced_courses = ["course4", "course5"]
 
-	constructor() {
-		let service = new CoursesService();
+	constructor(service: CoursesService) {
+		// specifying the service as an arg in the constructor saves us from managing the args of CoursesService
+		// it creates an instance of CoursesService and lets us use it
+		// let service = new CoursesService(); // DO NOT USE to prevent tight coupling
 		this.courses = service.getCourses();
+		this.len_courses = this.courses.length;
 	}
 
 	getTitle() {
